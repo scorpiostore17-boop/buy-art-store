@@ -3,7 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "engines": { "node": ">=22 <25" },
+  "engines": {
+    "node": "22.x"},
   "scripts": {
     "dev": "concurrently -k \"npm:api:dev\" \"npm:client:dev\"",
     "api:dev": "node --watch server/index.js",
@@ -31,4 +32,6 @@
   "allowScripts": {
     "esbuild@0.25.12": true
   }
+  
 }
+ 
