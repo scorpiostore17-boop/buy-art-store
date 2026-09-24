@@ -10,7 +10,9 @@ The storefront and admin panel use a Node/Express API backed by a SQLite databas
 4. Open `http://localhost:5173`. The API runs on port 3000; Vite proxies `/api` to it.
 5. Sign in at `/admin` using `ADMIN_PASSWORD`.
 
-The first server start creates a demo catalog and SQLite file. Change the admin password in Store settings before exposing the app publicly.
+To run the production-shaped server locally, use `npm run build` followed by `npm start`, then open `http://localhost:3000`. The server reads the existing SQLite file from `DB_PATH`; the copied `.env` points to `storage/store.sqlite`.
+
+The first server start creates an empty catalog and SQLite file. Add your real categories, products, shipping rates and settings from `/admin` before exposing the app publicly.
 
 ## Cloudinary and EmailJS
 
@@ -36,6 +38,23 @@ The included `render.yaml` defines a Node web service, health check and persiste
 6. Add a custom domain in Render and update its DNS records.
 
 The persistent disk keeps the SQLite file between restarts and deploys. It is tied to one service instance; keep this SQLite deployment at one instance. Back up the database before major changes.
+
+Render's free web service does not provide a persistent disk, so it is suitable for a temporary preview only; its SQLite data can disappear after a restart or redeploy. For a live store using this SQLite architecture, use the configured Render Starter service. A completely free production setup requires migrating the database layer to a hosted database such as Supabase or Neon, then hosting the Node service separately.
+
+## Git and deployment commands
+
+The project is configured to keep `.env`, `storage/`, and SQLite files out of Git. From the project directory:
+
+```powershell
+git init
+git add .
+git commit -m "Prepare Buy Art store for deployment"
+git branch -M main
+git remote add origin https://github.com/YOUR-USER/YOUR-REPOSITORY.git
+git push -u origin main
+```
+
+Before pushing, replace the remote URL and verify that `git status --short` does not list `.env` or `storage/store.sqlite`. For a local deployment check, run `npm run deploy:check`. In Render, connect the repository as a Blueprint; `render.yaml` runs the build and start commands and mounts the persistent SQLite disk automatically.
 
 ## API overview
 

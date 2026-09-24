@@ -27,41 +27,10 @@ if (isProduction && !process.env.SESSION_SECRET) throw new Error('Set SESSION_SE
 
 const now = () => new Date().toISOString();
 const id = (prefix) => `${prefix}-${crypto.randomUUID()}`;
-const demoCategories = [
-  { id: 'cat-1', name: 'T-shirts', slug: 't-shirts', image_url: '', is_active: true, sort_order: 1 },
-  { id: 'cat-2', name: 'Posters', slug: 'posters', image_url: '', is_active: true, sort_order: 2 },
-  { id: 'cat-3', name: 'Accessories', slug: 'accessories', image_url: '', is_active: true, sort_order: 3 },
-];
-const demoProducts = [
-  { id: 'prod-1', name: 'Luna Graphic Tee', description: 'Soft cotton tee with a hand-drawn moon illustration.', details: '100% cotton\nOversized fit', price: 2400, discount_price: 2000, category_id: 'cat-1', is_featured: true, is_visible: true, created_at: now(), updated_at: now() },
-  { id: 'prod-2', name: 'Desert Horizon Poster', description: 'Large format wall poster inspired by Algerian landscapes.', details: 'A2 size\nMatte finish', price: 3200, discount_price: null, category_id: 'cat-2', is_featured: true, is_visible: true, created_at: now(), updated_at: now() },
-  { id: 'prod-3', name: 'Sunset Tote Bag', description: 'Canvas tote bag with a bold sunset print.', details: 'Canvas\nLimited run', price: 1800, discount_price: 1500, category_id: 'cat-3', is_featured: false, is_visible: true, created_at: now(), updated_at: now() },
-];
 const seedState = () => ({
   store_settings: [{ id: 1, store_name: 'Buy Art', logo_url: '', primary_color: '#013294', secondary_color: '#F2140F', accent_color: '#F9E6C7', background_color: '#FFFFFF', text_color: '#0A1330', phone: '', email: '', whatsapp: '', instagram: '', facebook: '', tiktok: '', address: '', neighborhood_note: '', municipality: '', wilaya: '', maps_embed_url: '', working_hours: '', currency: 'DA', low_stock_threshold: 5, emailjs_service_id: '', emailjs_template_id: '', emailjs_public_key: '', emailjs_contact_template_id: '', cloudinary_cloud_name: '', cloudinary_api_key: '', cloudinary_api_secret: '', updated_at: now() }],
-  categories: demoCategories,
-  products: demoProducts,
-  product_variants: [
-    { id: 'var-1', product_id: 'prod-1', size: 'S', color_name: 'Black', color_hex: '#111111', stock: 7 },
-    { id: 'var-2', product_id: 'prod-1', size: 'M', color_name: 'Black', color_hex: '#111111', stock: 10 },
-    { id: 'var-3', product_id: 'prod-2', size: 'One size', color_name: '', color_hex: '#000000', stock: 12 },
-    { id: 'var-4', product_id: 'prod-3', size: 'One size', color_name: '', color_hex: '#000000', stock: 15 },
-  ],
-  product_images: [
-    { id: 'img-1', product_id: 'prod-1', url: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80', color_name: 'Black', sort_order: 0 },
-    { id: 'img-2', product_id: 'prod-2', url: 'https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&w=900&q=80', color_name: '', sort_order: 0 },
-    { id: 'img-3', product_id: 'prod-3', url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80', color_name: '', sort_order: 0 },
-  ],
-  landing_sections: [
-    { id: 'sec-hero', key: 'hero', title: 'Art for everyday life', description: 'Discover pieces made to bring your walls and wardrobe to life.', image_url: '', cta_text: 'Shop now', cta_link: '/shop', is_visible: true, sort_order: 0 },
-    { id: 'sec-slider', key: 'slider', title: 'Featured', is_visible: true, sort_order: 1 },
-    { id: 'sec-categories', key: 'categories', title: 'Shop by category', items_limit: 6, is_visible: true, sort_order: 2 },
-    { id: 'sec-featured', key: 'featured', title: 'Featured pieces', items_limit: 4, is_visible: true, sort_order: 3 },
-    { id: 'sec-new', key: 'new_arrivals', title: 'New arrivals', items_limit: 4, is_visible: true, sort_order: 4 },
-  ],
-  sliders: [{ id: 'slide-1', title: 'New arrivals', description: 'Find your next favorite piece.', image_url: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80', button_text: 'Shop now', button_link: '/shop', placement: 'home', sort_order: 1, is_active: true, created_at: now() }],
-  shipping_rates: [{ id: 'ship-16', wilaya_code: 16, name: 'Alger', price: 600, is_active: true }, { id: 'ship-31', wilaya_code: 31, name: 'Oran', price: 800, is_active: true }, { id: 'ship-25', wilaya_code: 25, name: 'Constantine', price: 750, is_active: true }],
-  coupons: [{ id: 'coupon-welcome', code: 'WELCOME10', discount_type: 'percentage', discount_value: 10, min_order: 0, expires_at: null, usage_limit: null, used_count: 0, is_active: true, created_at: now() }], coupon_products: [], coupon_categories: [], orders: [], order_items: [], drops: [], drop_products: [],
+  categories: [], products: [], product_variants: [], product_images: [], landing_sections: [], sliders: [],
+  shipping_rates: [], coupons: [], coupon_products: [], coupon_categories: [], orders: [], order_items: [], drops: [], drop_products: [],
 });
 
 const SQL = await initSqlJs({ locateFile: (file) => path.join(ROOT, 'node_modules', 'sql.js', 'dist', file) });

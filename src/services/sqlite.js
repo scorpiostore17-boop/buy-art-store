@@ -1,8 +1,8 @@
-import { DB_KEY, ensureLocalDb, saveLocalDb } from './localStore';
+import { LOCAL_DB_KEY, ensureLocalDb, saveLocalDb } from './localStore';
 
 export const sqlite = {
   name: 'local-sqlite',
-  dbKey: DB_KEY,
+  dbKey: LOCAL_DB_KEY,
   getState: ensureLocalDb,
   saveState: saveLocalDb,
 };
