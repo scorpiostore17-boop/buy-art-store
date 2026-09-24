@@ -6,6 +6,9 @@ import { formatMoney } from '../utils/format';
 const DEFAULTS = {
   store_name: 'Buy Art',
   logo_url: '',
+  landing_logo_url: '',
+  landing_background_url: '',
+  landing_description: '',
   primary_color: '#013294',
   secondary_color: '#F2140F',
   accent_color: '#F9E6C7',

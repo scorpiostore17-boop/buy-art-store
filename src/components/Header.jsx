@@ -23,7 +23,7 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="header">
+    <header className={`header${pathname === '/' ? ' header-transparent' : ''}`}>
       <div className="container header-inner">
         <button className="icon-btn menu-btn" aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)}><MenuIcon /></button>
 

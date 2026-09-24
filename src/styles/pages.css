@@ -2,8 +2,35 @@
 .section { padding: clamp(2.5rem, 6vw, 4.6rem) 0; }
 .section-soft { background: var(--soft); }
 .section-tight { padding: 1.2rem 0 0; }
+.landing-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-color: var(--primary);
+  background-image: var(--landing-image, linear-gradient(135deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 68%, var(--secondary)) 100%));
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+.landing-page::after { content: ''; position: absolute; z-index: 0; right: 0; bottom: 0; left: 0; height: clamp(5rem, 16vh, 10rem); pointer-events: none; background: linear-gradient(to bottom, transparent, var(--bg)); }
+.landing-wash { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, color-mix(in srgb, var(--text) 16%, transparent), color-mix(in srgb, var(--text) 62%, transparent)); }
+.landing-content { position: relative; z-index: 1; display: grid; justify-items: center; gap: 1.1rem; width: min(760px, 100% - 2.5rem); padding: 4rem 0 5.5rem; text-align: center; }
+.landing-logo { width: min(70vw, 520px); height: min(70vw, 520px); object-fit: contain; filter: drop-shadow(0 18px 28px color-mix(in srgb, #000 35%, transparent)); }
+.landing-kicker { margin: 0; color: #fff; font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; text-shadow: 0 2px 18px color-mix(in srgb, #000 50%, transparent); }
+.landing-cta { display: inline-flex; align-items: center; gap: 0.65rem; min-height: 56px; padding: 0.85rem 1.5rem; border: 1px solid color-mix(in srgb, #fff 72%, transparent); border-radius: 999px; background: color-mix(in srgb, #fff 16%, transparent); color: #fff; font-weight: 800; text-decoration: none; box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 62%, transparent), 0 14px 28px color-mix(in srgb, #000 28%, transparent); backdrop-filter: blur(18px) saturate(150%); transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease; }
+.landing-cta:hover { transform: translateY(-4px); border-color: #fff; background: color-mix(in srgb, #fff 24%, transparent); box-shadow: inset 0 1px 0 #fff, 0 20px 34px color-mix(in srgb, #000 38%, transparent); }
+.landing-cta svg { transition: transform 0.2s ease; }
+.landing-cta:hover svg { transform: translateX(4px); }
+@media (max-width: 600px) { .landing-content { padding-bottom: 4.8rem; } .landing-logo { width: min(78vw, 400px); height: min(78vw, 400px); } .landing-cta { min-height: 52px; } }
 .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1.8rem; }
 .section-head p { margin: 0.4rem 0 0; }
+.store-intro-section { position: relative; margin-top: -1px; padding-top: clamp(3.5rem, 8vw, 6rem); text-align: center; }
+.store-intro-section::before { content: ''; position: absolute; right: 0; bottom: 100%; left: 0; height: clamp(3.5rem, 8vw, 6rem); pointer-events: none; background: linear-gradient(to bottom, transparent, var(--bg)); }
+.store-intro { display: grid; justify-items: center; gap: 0.8rem; max-width: 700px; }
+.store-intro .eyebrow, .store-intro h2, .store-intro .lead { margin-bottom: 0; }
 
 .hero { padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2rem, 5vw, 4rem); overflow: hidden; }
 .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }

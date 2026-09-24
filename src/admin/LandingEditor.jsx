@@ -3,9 +3,31 @@ import ErrorState from '../components/ErrorState';
 import Loading from '../components/Loading';
 import { useToast } from '../context/ToastContext';
 import useAsync from '../hooks/useAsync';
-import { listProductOptions, listSectionsAdmin, saveSection, setProductFlag, swapSections } from '../services/adminApi';
+import { getAdminSettings, listProductOptions, listSectionsAdmin, saveSection, saveSettings, setProductFlag, swapSections } from '../services/adminApi';
 import ImageUploader from './ImageUploader';
 import { PageHead, Picker, Switch } from './ui';
+import { useSettings } from '../context/SettingsContext';
+
+function LandingAppearance() {
+  const toast = useToast();
+  const { reload: reloadTheme } = useSettings();
+  const data = useAsync(getAdminSettings, []);
+  const [f, setF] = useState(null);
+  const [busy, setBusy] = useState(false);
+  useEffect(() => { if (data.data) setF({ ...data.data }); }, [data.data]);
+  if (data.loading || !f) return data.error ? <ErrorState message={data.error} onRetry={data.reload} /> : <Loading inline />;
+  const save = async () => {
+    setBusy(true);
+    try { await saveSettings({ landing_description: f.landing_description || '', landing_background_url: f.landing_background_url || null }); await reloadTheme(); toast.success('Landing appearance saved'); }
+    catch (e) { toast.error(e.message); } finally { setBusy(false); }
+  };
+  return <section className="panel form-stack">
+    <h2>Landing appearance</h2>
+    <label className="field">Introductory phrase<textarea rows={2} value={f.landing_description || ''} onChange={(e) => setF((s) => ({ ...s, landing_description: e.target.value }))} /></label>
+    <ImageUploader label="Landing background" value={f.landing_background_url} onChange={(url) => setF((s) => ({ ...s, landing_background_url: url }))} folder="branding/landing" ratio="16 / 10" />
+    <div><button className="btn btn-primary btn-sm" onClick={save} disabled={busy}>{busy ? 'Saving…' : 'Save landing appearance'}</button></div>
+  </section>;
+}
 
 const ALL = ['title', 'description', 'image', 'cta', 'cta2', 'limit'];
 const META = {
@@ -110,6 +132,7 @@ export default function LandingEditor() {
   return (
     <>
       <PageHead title="Landing page" subtitle="Edit every section of the home page, show or hide it, and change the order." />
+      <LandingAppearance />
       {sections.loading ? <Loading /> : sections.error ? <ErrorState message={sections.error} onRetry={sections.reload} /> : (
         <div className="section-list">
           {sections.data.map((s, i) => (

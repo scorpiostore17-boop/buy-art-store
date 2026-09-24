@@ -143,6 +143,8 @@ export default function StoreSettings() {
           </div>
           <ImageUploader label="Logo" value={f.logo_url} onChange={(url) => setF((s) => ({ ...s, logo_url: url }))} folder="branding" ratio="1 / 1" />
           <p className="muted small">Use a transparent PNG. Without a logo, the bundled default is used.</p>
+          <ImageUploader label="Landing logo (optional)" value={f.landing_logo_url} onChange={(url) => setF((s) => ({ ...s, landing_logo_url: url }))} folder="branding/landing" ratio="1 / 1" />
+          <p className="muted small">The landing uses its own logo when provided; otherwise it uses the main store logo.</p>
         </section>
 
         <section className="panel">

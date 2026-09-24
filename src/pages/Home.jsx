@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import CtaLink from '../components/CtaLink';
 import DropSection from '../components/DropSection';
-import EmptyState from '../components/EmptyState';
 import ErrorState from '../components/ErrorState';
 import Img from '../components/Img';
 import Loading, { SkeletonGrid } from '../components/Loading';
@@ -12,6 +11,35 @@ import { useCatalog } from '../context/CatalogContext';
 import { useSettings } from '../context/SettingsContext';
 import useAsync from '../hooks/useAsync';
 import { fetchLandingSections, fetchSliders } from '../services/api';
+
+function Landing() {
+  const { logoSrc, settings } = useSettings();
+  const logo = settings.landing_logo_url || logoSrc;
+  const background = settings.landing_background_url;
+  return (
+    <section className="landing-page" style={background ? { '--landing-image': `url(${JSON.stringify(background)})` } : undefined}>
+      <div className="landing-wash" aria-hidden="true" />
+      <div className="landing-content">
+        <img className="landing-logo" src={logo} alt={settings.store_name} width="560" height="560" />
+        <p className="landing-kicker">{settings.landing_description || settings.store_name}</p>
+        <Link className="landing-cta" to="/shop">Discover Products <ArrowRight width={19} height={19} /></Link>
+      </div>
+    </section>
+  );
+}
+
+function StoreIntro() {
+  const { settings } = useSettings();
+  return (
+    <section className="section store-intro-section">
+      <div className="container store-intro">
+        <p className="eyebrow">{settings.store_name}</p>
+        <h2>Art that belongs in your everyday.</h2>
+        <p className="lead">Discover thoughtfully selected pieces made to bring more character, color, and feeling into the spaces you live in.</p>
+      </div>
+    </section>
+  );
+}
 
 function SectionHead({ s, linkText, linkTo }) {
   return (
@@ -57,7 +85,7 @@ function Categories({ s }) {
   const list = categories.slice(0, s.items_limit || 8);
   if (!list.length) return null;
   return (
-    <section className="section">
+    <section className="section categories-section">
       <div className="container">
         <SectionHead s={s} />
         <div className="category-grid">
@@ -124,9 +152,7 @@ export default function Home() {
 
   if (sections.loading) return <Loading />;
   if (sections.error) return <div className="container"><ErrorState message={sections.error} onRetry={sections.reload} /></div>;
-  if (!sections.data?.length) {
-    return <div className="container"><EmptyState title="Welcome" text="This store is being set up. Please check back soon." actionLabel="Browse the shop" actionTo="/shop" /></div>;
-  }
+  const contentSections = (sections.data || []).filter((s) => s.key !== 'hero' && s.key !== 'categories');
 
   const render = (s) => {
     switch (s.key) {
@@ -142,5 +168,5 @@ export default function Home() {
       default: return null;
     }
   };
-  return <>{sections.data.map(render)}</>;
+  return <><Landing /><StoreIntro />{contentSections.map(render)}</>;
 }

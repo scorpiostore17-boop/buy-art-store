@@ -28,7 +28,7 @@ if (isProduction && !process.env.SESSION_SECRET) throw new Error('Set SESSION_SE
 const now = () => new Date().toISOString();
 const id = (prefix) => `${prefix}-${crypto.randomUUID()}`;
 const seedState = () => ({
-  store_settings: [{ id: 1, store_name: 'Buy Art', logo_url: '', primary_color: '#013294', secondary_color: '#F2140F', accent_color: '#F9E6C7', background_color: '#FFFFFF', text_color: '#0A1330', phone: '', email: '', whatsapp: '', instagram: '', facebook: '', tiktok: '', address: '', neighborhood_note: '', municipality: '', wilaya: '', maps_embed_url: '', working_hours: '', currency: 'DA', low_stock_threshold: 5, emailjs_service_id: '', emailjs_template_id: '', emailjs_public_key: '', emailjs_contact_template_id: '', cloudinary_cloud_name: '', cloudinary_api_key: '', cloudinary_api_secret: '', updated_at: now() }],
+  store_settings: [{ id: 1, store_name: 'Buy Art', logo_url: '', landing_logo_url: '', landing_background_url: '', primary_color: '#013294', secondary_color: '#F2140F', accent_color: '#F9E6C7', background_color: '#FFFFFF', text_color: '#0A1330', phone: '', email: '', whatsapp: '', instagram: '', facebook: '', tiktok: '', address: '', neighborhood_note: '', municipality: '', wilaya: '', maps_embed_url: '', working_hours: '', currency: 'DA', low_stock_threshold: 5, emailjs_service_id: '', emailjs_template_id: '', emailjs_public_key: '', emailjs_contact_template_id: '', cloudinary_cloud_name: '', cloudinary_api_key: '', cloudinary_api_secret: '', updated_at: now() }],
   categories: [], products: [], product_variants: [], product_images: [], landing_sections: [], sliders: [],
   shipping_rates: [], coupons: [], coupon_products: [], coupon_categories: [], orders: [], order_items: [], drops: [], drop_products: [],
 });
