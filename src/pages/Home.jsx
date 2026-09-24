@@ -22,7 +22,7 @@ function Landing() {
       <div className="landing-content">
         <img className="landing-logo" src={logo} alt={settings.store_name} width="560" height="560" />
         <p className="landing-kicker">{settings.landing_description || settings.store_name}</p>
-        <Link className="landing-cta" to="/shop">Discover Products <ArrowRight width={19} height={19} /></Link>
+        <Link className="btn btn-primary landing-cta" to="/shop">Discover Products <ArrowRight width={19} height={19} /></Link>
       </div>
     </section>
   );
