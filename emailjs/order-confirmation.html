@@ -1,0 +1,55 @@
+<div style="background:#f6efe2;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;color:#0a1330;">
+  <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:18px;overflow:hidden;border:3px solid #013294;">
+    <div style="background:#013294;padding:22px;text-align:center;">
+      <div style="font-size:30px;font-weight:bold;color:#f9e6c7;letter-spacing:1px;">{{store_name}}</div>
+      <div style="color:#ffffff;font-size:14px;margin-top:4px;">Order confirmation</div>
+    </div>
+
+    <div style="padding:24px;">
+      <h2 style="margin:0 0 8px;font-size:22px;color:#013294;">Thank you, {{customer_name}}!</h2>
+      <p style="margin:0 0 18px;font-size:15px;line-height:1.5;">
+        We received your order <strong>#{{order_id}}</strong> on {{order_date}}.
+        We will call you on <strong>{{customer_phone}}</strong> to confirm the delivery.
+      </p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        <tr style="background:#f9e6c7;color:#013294;">
+          <th align="left" style="padding:8px;">Product</th>
+          <th align="center" style="padding:8px;">Qty</th>
+          <th align="right" style="padding:8px;">Total</th>
+        </tr>
+        {{#orders}}
+        <tr>
+          <td style="padding:10px 8px;border-bottom:1px solid #eee;">
+            <table style="border-collapse:collapse;"><tr>
+              <td style="padding-right:10px;"><img src="{{image_url}}" width="56" height="70" alt="" style="border-radius:8px;object-fit:cover;display:block;"></td>
+              <td><strong>{{name}}</strong><br><span style="color:#666;">{{variant}}</span><br><span style="color:#666;">{{unit_price}}</span></td>
+            </tr></table>
+          </td>
+          <td align="center" style="padding:10px 8px;border-bottom:1px solid #eee;">{{quantity}}</td>
+          <td align="right" style="padding:10px 8px;border-bottom:1px solid #eee;">{{line_total}}</td>
+        </tr>
+        {{/orders}}
+      </table>
+
+      <table style="width:100%;margin-top:14px;font-size:14px;">
+        <tr><td>Subtotal</td><td align="right">{{subtotal}}</td></tr>
+        <tr><td>Discount ({{coupon_code}})</td><td align="right">-{{discount}}</td></tr>
+        <tr><td>Shipping</td><td align="right">{{shipping}}</td></tr>
+        <tr><td style="padding-top:10px;font-size:18px;font-weight:bold;color:#013294;">Total</td>
+            <td align="right" style="padding-top:10px;font-size:18px;font-weight:bold;color:#013294;">{{total}}</td></tr>
+      </table>
+
+      <div style="margin-top:22px;padding:14px;background:#f6efe2;border-radius:12px;font-size:14px;line-height:1.6;">
+        <strong>Delivery address</strong><br>
+        {{address}}, {{neighborhood}}<br>
+        {{municipality}}, {{wilaya}}<br>
+        Note: {{delivery_note}}
+      </div>
+
+      <p style="margin:22px 0 0;font-size:13px;color:#666;text-align:center;">
+        Questions? Contact us: {{store_phone}} · {{store_email}}
+      </p>
+    </div>
+  </div>
+</div>
