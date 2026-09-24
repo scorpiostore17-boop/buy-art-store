@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "engines": { "node": ">=20 <25" },
+  "engines": { "node": ">=22 <25" },
   "scripts": {
     "dev": "concurrently -k \"npm:api:dev\" \"npm:client:dev\"",
     "api:dev": "node --watch server/index.js",
